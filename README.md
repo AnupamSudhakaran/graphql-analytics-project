@@ -44,6 +44,9 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## How See the GraphQL UI
+After a successful startup please open your browser and go the link localhost:3000/graphql [This will give a beautiful UI to interact with the queries and mutations] though i have added a sample query in the mentioned file.
+Also have used apollo server  (Much better UI -- you might need network connection though).
 
 ## Filing Data
 
