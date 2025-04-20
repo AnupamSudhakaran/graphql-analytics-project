@@ -68,13 +68,18 @@ localhost:3000/graphql -- which will provide a UI to work with all the Queries a
 
 Have divided the content into diffrent modules 
 
-analytics  -- Is the hear -- has the resolver --  logic -aggregations
+analytics
+Is the heart 
+has the resolver ,logic  and all the aggregations
 
-graph-models  --  has graphql objects
+graph-models 
+has graphql objects
 
-input-type.models  --  has graphql inputypes
+input-type.models 
+has graphql inputypes
 
-models -- the mongoDb schemas
+models 
+The mongoDb schemas
 
 
 have put a sample query in the queries.graphql file, others queries can be found in the above specified URL
