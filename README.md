@@ -48,13 +48,13 @@ $ npm run start:prod
 After a successful startup please open your browser and go the link localhost:3000/graphql [This will give a beautiful UI to interact with the queries and mutations] though i have added a sample query in the mentioned file.
 Also have used apollo server  (Much better UI -- you might need network connection though).
 
-## Filing Data
+## Filing In  Data
 
 ```
 The CSV Sheet has a small problem with data 
-make sure you have all the _id feilds has string , niether UUID(Lack of native support) or ObjectId(Diffrent format is accepted) do not work.
+make sure you have all the _id feilds as string , niether UUID(Lack of native support) or ObjectId(Diffrent format is accepted in monogo) do not work.
 
-the ordes field where there are products by default makes it a string so have wrote a small script to change it to a better Object Dataype 
+int the orders collection, wherin the  products by default becomes a string it a string during the CSV upload  so have wrote a small script to change it to a better Object Dataype 
 
 please call this curl after starting up the service 
 
@@ -90,7 +90,7 @@ have put a sample query in the queries.graphql file, others queries can be found
 
 Have enabled caching in getCustomerSpends Query 
 
-Have put indexs which are visible in the Mongo Schemas also running the code once will shoot indexes onto the DB -- 
+Have put indexes which are visible in the Mongo Schemas also running the code once will shoot indexes onto the DB -- 
 pelase note  _id is by default indexed 
 
 ```
