@@ -1,18 +1,27 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, PipelineStage } from 'mongoose';
 import { OrderModel, ProductDetails } from 'src/models/order.model';
-import { UUID } from 'bson';
-import { json } from 'stream/consumers';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Cache } from 'cache-manager';
+
 @Injectable()
 export class AnalyticsService {
 
     constructor(
         @InjectModel("order")
-        private readonly orderModel: Model<OrderModel>
+        private readonly orderModel: Model<OrderModel>,
+        @Inject("CACHE_MANAGER") 
+        private cacheManager: Cache
     ) { }
     async getCustomerSpends(customerId: string): Promise<any> {
         console.log("Customer ID: ", customerId)
+        const cachedData = await this.cacheManager.get(customerId)
+        if(cachedData){
+            return cachedData
+        }
+
+        
         const pipeline = [
             {
                 $match: { customerId: customerId, status: "completed" }
@@ -37,7 +46,13 @@ export class AnalyticsService {
         ];
         const result = await this.orderModel.aggregate(pipeline).exec();
         console.log("Result: ", result)
-        // Mocked data for demonstration purposes
+        try{
+            const cacheResp =  await this.cacheManager.set(customerId,result[0],36000);
+            console.log("Cache Response: ", cacheResp)
+        }
+        catch(e){
+            console.log("Error caching data: ", e)
+        }
         return result[0];
     }
 

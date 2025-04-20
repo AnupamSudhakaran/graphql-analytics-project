@@ -13,6 +13,9 @@ import {
 import { CustomerSchema } from './models/customer.model';
 import { OrderSchema } from './models/order.model';
 import { ProductSchmea } from './models/product.model';
+import { CacheModule } from '@nestjs/cache-manager';
+import * as redisStore from 'cache-manager-redis-store';
+
 @Module({
   imports: [
     MongooseModule.forRoot("mongodb://127.0.0.1:27017",{
@@ -31,9 +34,19 @@ import { ProductSchmea } from './models/product.model';
 
     }
     ),
+    CacheModule.registerAsync({
+      isGlobal:true,
+      useFactory: async () => ({
+        store: redisStore,
+        host: 'localhost',
+        port: 6379,
+        ttl: 60, // seconds
+      }),
+    }),
     AnalyticsModule
   ],
   controllers: [AppController],
   providers: [AppService],
+  exports: [CacheModule]
 })
 export class AppModule {}

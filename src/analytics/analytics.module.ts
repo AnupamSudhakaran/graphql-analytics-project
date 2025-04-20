@@ -7,6 +7,7 @@ import { CustomerSchema } from 'src/models/customer.model';
 import { MongooseModule } from '@nestjs/mongoose';
 import { OrderSchema } from 'src/models/order.model';
 import { ProductSchmea } from 'src/models/product.model';
+import { Cache, CACHE_MANAGER, CacheModule } from '@nestjs/cache-manager';
 
 @Module({
   imports:[
@@ -14,8 +15,9 @@ import { ProductSchmea } from 'src/models/product.model';
       {name:"customer",schema:CustomerSchema},
       {name:"order",schema:OrderSchema},
       {name:"product",schema:ProductSchmea}
-  ])],
+  ]),],
   providers: [AnalyticsService,AnalyticsResolver],
-  controllers: [AnalyticsController]
+  controllers: [AnalyticsController],
+  exports:[]
 })
 export class AnalyticsModule {}

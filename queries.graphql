@@ -1,0 +1,14 @@
+
+query GetCustomerSpends($params: GenericIdInputType!) {
+  getCustomerSpends(params: $params) {
+    customerId
+    totalSpent
+    averageOrderValue
+  }
+}
+
+{
+  "params": {
+    "_id": "adf96a4e-6987-4731-8798-09b109ff65c3"
+  }
+}
